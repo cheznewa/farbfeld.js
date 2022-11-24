@@ -23,7 +23,6 @@ document.write("<br/>");
 }
 else
 {
-render = "Not A Farbfeld";
+document.write("Not A Farbfeld")
 }
-return render;
 }
