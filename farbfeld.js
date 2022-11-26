@@ -13,11 +13,11 @@ for (var a=0;a<h;a++)
 {
 for (var b=0;b<w;b++)
 {
-red   = String(ff[16+0+(8*(b+(a*w)))].charCodeAt());
-green = String(ff[16+2+(8*(b+(a*w)))].charCodeAt());
-blue  = String(ff[16+4+(8*(b+(a*w)))].charCodeAt());
-alpha = String(ff[16+6+(8*(b+(a*w)))].charCodeAt());
-document.write("<rect width=\"1\" height=\"1\" x=\""+b+"\" y=\""+a+"\" style=\"fill:rgba("+red+","+green+","+blue+","+alpha+");\"/>");
+red   = ff[16+0+(8*(b+(a*w)))].charCodeAt();
+green = ff[16+2+(8*(b+(a*w)))].charCodeAt();
+blue  = ff[16+4+(8*(b+(a*w)))].charCodeAt();
+alpha = ff[16+6+(8*(b+(a*w)))].charCodeAt();
+document.write("<rect width=\"1\" height=\"1\" x=\""+b+"\" y=\""+a+"\" style=\"fill:rgba("+String(red)+","+String(green)+","+String(blue)+","+String(alpha)+");\"/>");
 }
 }
 document.write("</svg>");
@@ -146,6 +146,153 @@ var green = parseInt(argv[m][2] + argv[m][3],16)
 var blue = parseInt(argv[m][4] + argv[m][5],16)
 }
 document.write("<rect width=\"1\" height=\"1\" x=\""+b+"\" y=\""+a+"\" style=\"fill:rgba("+String(red)+","+String(green)+","+String(blue)+","+String(alpha)+");\"/>");
+}
+}
+document.write("</svg>");
+}
+else
+{
+document.write("Not A Farbfeld");
+}
+}
+function render_farbfeld_ff2clear(ff,mod)
+{
+var red;
+var green;
+var blue;
+var alpha;
+if (102 == ff[0].charCodeAt() && 97 == ff[1].charCodeAt() && 114 == ff[2].charCodeAt() && 98 == ff[3].charCodeAt() && 102 == ff[4].charCodeAt() && 101 == ff[5].charCodeAt() && 108 == ff[6].charCodeAt() && 100 == ff[7].charCodeAt())
+{
+var w = (ff[8].charCodeAt()*16777216)+(ff[9].charCodeAt()*65536)+(ff[10].charCodeAt()*256)+(ff[11].charCodeAt());
+var h = (ff[12].charCodeAt()*16777216)+(ff[13].charCodeAt()*65536)+(ff[14].charCodeAt()*256)+(ff[15].charCodeAt());
+document.write("<svg width=\""+w+"\" height=\""+h+"\">");
+for (var a=0;a<h;a++)
+{
+for (var b=0;b<w;b++)
+{
+red   = ff[16+0+(8*(b+(a*w)))].charCodeAt();
+green = ff[16+2+(8*(b+(a*w)))].charCodeAt();
+blue  = ff[16+4+(8*(b+(a*w)))].charCodeAt();
+alpha = ff[16+6+(8*(b+(a*w)))].charCodeAt();
+if (b == 0)
+{
+var rr=red
+var gg=green
+var bb=blue
+}
+var dr=red-rr
+var dg=green-gg
+var db=blue-bb
+var rv=red
+var gv=green
+var bv=blue
+var d=Math.floor((dr+dg+db)/3)
+if (mod == "rc")
+{
+if (d < 0)
+{
+rv = Math.min(red + Math.abs(d),255)
+}
+else if (d > 0)
+{
+rv = Math.max(red - Math.abs(d),0)
+}
+}
+if (mod == "gm")
+{
+if (d < 0)
+{
+gv = Math.min(green + Math.abs(d),255)
+}
+else if (d > 0)
+{
+gv = Math.max(green - Math.abs(d),0)
+}
+}
+if (mod == "by")
+{
+if (d < 0)
+{
+bv = Math.min(blue + Math.abs(d),255)
+}
+else if (d > 0)
+{
+bv = Math.max(blue - Math.abs(d),0)
+}
+}
+if (mod == "cr")
+{
+if (d < 0)
+{
+gv = Math.min(green + Math.abs(d),255)
+bv = Math.min(blue + Math.abs(d),255)
+}
+else if (d > 0)
+{
+gv = Math.max(green - Math.abs(d),0)
+bv = Math.max(blue - Math.abs(d),0)
+}
+}
+if (mod == "mg")
+{
+if (d < 0)
+{
+rv = Math.min(red + Math.abs(d),255)
+bv = Math.min(blue + Math.abs(d),255)
+}
+else if (d > 0)
+{
+rv = Math.max(red - Math.abs(d),0)
+bv = Math.max(blue - Math.abs(d),0)
+}
+}
+if (mod == "yb")
+{
+if (d < 0)
+{
+rv = Math.min(red + Math.abs(d),255)
+gv = Math.min(green + Math.abs(d),255)
+}
+else if (d > 0)
+{
+rv = Math.max(red - Math.abs(d),0)
+gv = Math.max(green - Math.abs(d),0)
+}
+}
+if (mod == "rgb")
+{
+if (d < 0)
+{
+rv = Math.min(red + Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.5))),255)
+gv = Math.min(green + Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.25))),255)
+bv = Math.min(blue + Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.125))),255)
+}
+else if (d > 0)
+{
+rv = Math.max(red - Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.5))),0)
+gv = Math.max(green - Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.25))),0)
+bv = Math.max(blue - Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.125))),0)
+}
+}
+if (mod == "bgr")
+{
+if (d < 0)
+{
+rv = Math.min(red + Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.125))),255)
+gv = Math.min(green + Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.25))),255)
+bv = Math.min(blue + Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.5))),255)
+}
+else if (d > 0)
+{
+rv = Math.max(red - Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.125))),0)
+gv = Math.max(green - Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.25))),0)
+bv = Math.max(blue - Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.5))),0)
+}
+}
+document.write("<rect width=\"1\" height=\"1\" x=\""+b+"\" y=\""+a+"\" style=\"fill:rgba("+String(rv)+","+String(gv)+","+String(bv)+","+String(alpha)+");\"/>");
+rr=red
+gg=green
+bb=blue
 }
 }
 document.write("</svg>");
