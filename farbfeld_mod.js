@@ -169,6 +169,27 @@ red = Math.max(Math.floor(k*ir)+red-Math.floor((255-hr)*((255-z)/255.0)),0)
 green = Math.max(Math.floor(k*ig)+green-Math.floor((255-hg)*((255-z)/255.0)),0)
 blue = Math.max(Math.floor(k*ib)+blue-Math.floor((255-hb)*((255-z)/255.0)),0)
 }
+if (mod == "gam")
+{
+red = Math.floor(Math.pow(red/255,1/argv[0])*255)
+green = Math.floor(Math.pow(green/255,1/argv[1])*255)
+blue = Math.floor(Math.pow(blue/255,1/argv[2])*255)
+}
+if (mod == "col")
+{
+br = parseInt(argv[0][0] + argv[0][1],16)
+bg = parseInt(argv[0][2] + argv[0][3],16)
+bb = parseInt(argv[0][4] + argv[0][5],16)
+red = Math.floor(red*(1-(argv[1]/255)))+Math.floor(br*argv[1]/255)
+green = Math.floor(green*(1-(argv[2]/255)))+Math.floor(bg*argv[2]/255)
+blue = Math.floor(blue*(1-(argv[3]/255)))+Math.floor(bb*argv[3]/255)
+}
+if (mod == "pos")
+{
+red = Math.floor(red/Math.floor(255/argv[0]))*Math.floor(255/argv[0])
+green = Math.floor(green/Math.floor(255/argv[1]))*Math.floor(255/argv[1])
+blue = Math.floor(blue/Math.floor(255/argv[2]))*Math.floor(255/argv[2])
+}
 document.write("<rect width=\"1\" height=\"1\" x=\""+b+"\" y=\""+a+"\" style=\"fill:rgba("+String(red)+","+String(green)+","+String(blue)+","+String(alpha)+");\"/>");
 }
 }
