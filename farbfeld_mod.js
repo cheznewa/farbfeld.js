@@ -190,6 +190,35 @@ red = Math.floor(red/Math.floor(255/argv[0]))*Math.floor(255/argv[0])
 green = Math.floor(green/Math.floor(255/argv[1]))*Math.floor(255/argv[1])
 blue = Math.floor(blue/Math.floor(255/argv[2]))*Math.floor(255/argv[2])
 }
+if (mod == "lum")
+{
+red = Math.floor(Math.max(Math.min(red+(argv[3]*(red-argv[0])),255),0))
+green = Math.floor(Math.max(Math.min(green+(argv[4]*(green-argv[1])),255),0))
+blue = Math.floor(Math.max(Math.min(blue+(argv[5]*(blue-argv[2])),255),0))
+}
+if (mod == "shu")
+{
+red = Math.min(((Math.floor(red*((255-argv[0])/255.0))+Math.floor(red*((255-argv[1])/255.0)))/2)+((Math.floor(green*((argv[2])/255.0))+Math.floor(blue*((argv[4])/255.0)))/2),255)
+green = Math.min(((Math.floor(green*((255-argv[2])/255.0))+Math.floor(green*((255-argv[3])/255.0)))/2)+((Math.floor(red*((argv[0])/255.0))+Math.floor(blue*((argv[5])/255.0)))/2),255)
+blue = Math.min(((Math.floor(blue*((255-argv[4])/255.0))+Math.floor(blue*((255-argv[5])/255.0)))/2)+((Math.floor(red*((argv[1])/255.0))+Math.floor(green*((argv[3])/255.0)))/2),255)
+}
+if (mod == "old")
+{
+var base = Math.floor((red+green+blue)/3)
+var t = Math.min(Math.floor((Math.floor(Date.now()/1000)-argv[0])/argv[1]),511)
+if (t < 256)
+{
+red   = Math.floor(red*(1-(t/255)))+Math.floor(base*t/255)
+green = Math.floor(green*(1-(t/255)))+Math.floor(base*t/255)
+blue  = Math.floor(blue*(1-(t/255)))+Math.floor(base*t/255)
+}
+else
+{
+red = Math.floor(base/Math.floor(255/(255-(t-255))))*Math.floor(255.0/(255-(t-255)))
+green = Math.floor(base/Math.floor(255/(255-(t-255))))*Math.floor(255.0/(255-(t-255)))
+blue = Math.floor(base/Math.floor(255/(255-(t-255))))*Math.floor(255.0/(255-(t-255)))
+}
+}
 document.write("<rect width=\"1\" height=\"1\" x=\""+b+"\" y=\""+a+"\" style=\"fill:rgba("+String(red)+","+String(green)+","+String(blue)+","+String(alpha)+");\"/>");
 }
 }
