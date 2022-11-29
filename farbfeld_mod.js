@@ -1,4 +1,4 @@
-function render_farbfeld_coloreffectreplacer(ff,mod,argv)
+function render_farbfeld_coloreffectreplacer(ff,name,mod,argv)
 {
 var red;
 var green;
@@ -8,7 +8,9 @@ if (102 == ff[0].charCodeAt() && 97 == ff[1].charCodeAt() && 114 == ff[2].charCo
 {
 var w = (ff[8].charCodeAt()*16777216)+(ff[9].charCodeAt()*65536)+(ff[10].charCodeAt()*256)+(ff[11].charCodeAt());
 var h = (ff[12].charCodeAt()*16777216)+(ff[13].charCodeAt()*65536)+(ff[14].charCodeAt()*256)+(ff[15].charCodeAt());
-document.write("<svg width=\""+w+"\" height=\""+h+"\">");
+var c = document.getElementById(name);
+var cont = c.getContext('2d');
+var imgdata = cont.createImageData(w,h);
 for (var a=0;a<h;a++)
 {
 for (var b=0;b<w;b++)
@@ -219,17 +221,20 @@ green = Math.floor(base/Math.floor(255/(255-(t-255))))*Math.floor(255.0/(255-(t-
 blue = Math.floor(base/Math.floor(255/(255-(t-255))))*Math.floor(255.0/(255-(t-255)))
 }
 }
-document.write("<rect width=\"1\" height=\"1\" x=\""+b+"\" y=\""+a+"\" style=\"fill:rgba("+String(red)+","+String(green)+","+String(blue)+","+String(alpha)+");\"/>");
+imgdata.data[4*((a*w)+b)+0] = red;
+imgdata.data[4*((a*w)+b)+1] = green;
+imgdata.data[4*((a*w)+b)+2] = blue;
+imgdata.data[4*((a*w)+b)+3] = alpha;
 }
 }
-document.write("</svg>");
+cont.putImageData(imgdata,0,0);
 }
 else
 {
 document.write("Not A Farbfeld");
 }
 }
-function render_farbfeld_ff2clear(ff,mod)
+function render_farbfeld_ff2clear(ff,name,mod)
 {
 var red;
 var green;
@@ -239,7 +244,9 @@ if (102 == ff[0].charCodeAt() && 97 == ff[1].charCodeAt() && 114 == ff[2].charCo
 {
 var w = (ff[8].charCodeAt()*16777216)+(ff[9].charCodeAt()*65536)+(ff[10].charCodeAt()*256)+(ff[11].charCodeAt());
 var h = (ff[12].charCodeAt()*16777216)+(ff[13].charCodeAt()*65536)+(ff[14].charCodeAt()*256)+(ff[15].charCodeAt());
-document.write("<svg width=\""+w+"\" height=\""+h+"\">");
+var c = document.getElementById(name);
+var cont = c.getContext('2d');
+var imgdata = cont.createImageData(w,h);
 for (var a=0;a<h;a++)
 {
 for (var b=0;b<w;b++)
@@ -248,6 +255,10 @@ red   = ff[16+0+(8*(b+(a*w)))].charCodeAt();
 green = ff[16+2+(8*(b+(a*w)))].charCodeAt();
 blue  = ff[16+4+(8*(b+(a*w)))].charCodeAt();
 alpha = ff[16+6+(8*(b+(a*w)))].charCodeAt();
+imgdata.data[4*((a*w)+b)+0] = red;
+imgdata.data[4*((a*w)+b)+1] = green;
+imgdata.data[4*((a*w)+b)+2] = blue;
+imgdata.data[4*((a*w)+b)+3] = alpha;
 if (b == 0)
 {
 var rr=red
@@ -393,20 +404,23 @@ gv = Math.max(green - Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.25)))
 bv = Math.max(blue - Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.5))),0)
 }
 }
-document.write("<rect width=\"1\" height=\"1\" x=\""+b+"\" y=\""+a+"\" style=\"fill:rgba("+String(rv)+","+String(gv)+","+String(bv)+","+String(alpha)+");\"/>");
+imgdata.data[4*((a*w)+b)+0] = rv;
+imgdata.data[4*((a*w)+b)+1] = gv;
+imgdata.data[4*((a*w)+b)+2] = bv;
+imgdata.data[4*((a*w)+b)+3] = alpha;
 rr=red
 gg=green
 bb=blue
 }
 }
-document.write("</svg>");
+cont.putImageData(imgdata,0,0);
 }
 else
 {
 document.write("Not A Farbfeld");
 }
 }
-function render_farbfeld_clear2ff(ff,mod)
+function render_farbfeld_clear2ff(ff,name,mod)
 {
 var red;
 var green;
@@ -416,7 +430,9 @@ if (102 == ff[0].charCodeAt() && 97 == ff[1].charCodeAt() && 114 == ff[2].charCo
 {
 var w = (ff[8].charCodeAt()*16777216)+(ff[9].charCodeAt()*65536)+(ff[10].charCodeAt()*256)+(ff[11].charCodeAt());
 var h = (ff[12].charCodeAt()*16777216)+(ff[13].charCodeAt()*65536)+(ff[14].charCodeAt()*256)+(ff[15].charCodeAt());
-document.write("<svg width=\""+w+"\" height=\""+h+"\">");
+var c = document.getElementById(name);
+var cont = c.getContext('2d');
+var imgdata = cont.createImageData(w,h);
 for (var a=0;a<h;a++)
 {
 for (var b=0;b<w;b++)
@@ -506,17 +522,20 @@ rv = Math.max(red - Math.abs(d),0)
 gv = Math.max(green - Math.abs(d),0)
 }
 }
-document.write("<rect width=\"1\" height=\"1\" x=\""+b+"\" y=\""+a+"\" style=\"fill:rgba("+String(rv)+","+String(gv)+","+String(bv)+","+String(alpha)+");\"/>");
+imgdata.data[4*((a*w)+b)+0] = rv;
+imgdata.data[4*((a*w)+b)+1] = gv;
+imgdata.data[4*((a*w)+b)+2] = bv;
+imgdata.data[4*((a*w)+b)+3] = alpha;
 }
 }
-document.write("</svg>");
+cont.putImageData(imgdata,0,0);
 }
 else
 {
 document.write("Not A Farbfeld");
 }
 }
-function render_farbfeld_ff2clear_custom(ff,a,b)
+function render_farbfeld_ff2clear_custom(ff,name,a,b)
 {
 var ra = parseInt(a[0] + a[1],16)
 var ga = parseInt(a[2] + a[3],16)
@@ -532,7 +551,9 @@ if (102 == ff[0].charCodeAt() && 97 == ff[1].charCodeAt() && 114 == ff[2].charCo
 {
 var w = (ff[8].charCodeAt()*16777216)+(ff[9].charCodeAt()*65536)+(ff[10].charCodeAt()*256)+(ff[11].charCodeAt());
 var h = (ff[12].charCodeAt()*16777216)+(ff[13].charCodeAt()*65536)+(ff[14].charCodeAt()*256)+(ff[15].charCodeAt());
-document.write("<svg width=\""+w+"\" height=\""+h+"\">");
+var c = document.getElementById(name);
+var cont = c.getContext('2d');
+var imgdata = cont.createImageData(w,h);
 for (var a=0;a<h;a++)
 {
 for (var b=0;b<w;b++)
@@ -564,15 +585,18 @@ else if (d > 0)
 {
 rv = Math.max(red - (Math.floor((1-(rb/255))*(Math.abs(d)))),0)
 gv = Math.max(green - (Math.floor((1-(gb/255))*(Math.abs(d)))),0)
-bv = Math.max(blue - (Math.floor((1-(bc/255.0))*(Math.abs(d)))),0)
+bv = Math.max(blue - (Math.floor((1-(bc/255))*(Math.abs(d)))),0)
 }
-document.write("<rect width=\"1\" height=\"1\" x=\""+b+"\" y=\""+a+"\" style=\"fill:rgba("+String(rv)+","+String(gv)+","+String(bv)+","+String(alpha)+");\"/>");
 rr=red
 gg=green
 bb=blue
+imgdata.data[4*((a*w)+b)+0] = rv;
+imgdata.data[4*((a*w)+b)+1] = gv;
+imgdata.data[4*((a*w)+b)+2] = bv;
+imgdata.data[4*((a*w)+b)+3] = alpha;
 }
 }
-document.write("</svg>");
+cont.putImageData(imgdata,0,0);
 }
 else
 {

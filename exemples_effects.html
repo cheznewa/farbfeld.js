@@ -2,12 +2,52 @@
 <script src="exemples.js"></script>
 <h2>The Effects</h2>
 add<br/>
-<script>render_farbfeld_coloreffectreplacer(imagepicture,"add",[60,0,0]);</script><br/>
+<canvas id="add" width=400 height=265></canvas><br/>
 sub<br/>
-<script>render_farbfeld_coloreffectreplacer(imagepicture,"sub",[100,100,100]);</script><br/>
+<canvas id="sub" width=400 height=265></canvas><br/>
 xor<br/>
-<script>render_farbfeld_coloreffectreplacer(imagepicture,"xor",[240,240,240]);</script><br/>
+<canvas id="xor" width=400 height=265></canvas><br/>
 Black And White<br/>
-<script>render_farbfeld_coloreffectreplacer(imagepicture,"bnw",[230,230,230]);</script><br/>
+<canvas id="bnw" width=400 height=265></canvas><br/>
 Sepia<br/>
-<script>render_farbfeld_coloreffectreplacer(imagepicture,"sep",[222,222,222]);</script><br/>
+<canvas id="sep" width=400 height=265></canvas><br/>
+map<br/>
+<canvas id="map" width=400 height=265></canvas><br/>
+Encode Map<br/>
+<canvas id="emp" width=400 height=265></canvas><br/>
+Decode Map<br/>
+<canvas id="dmp" width=400 height=265></canvas><br/>
+Paper Color<br/>
+<canvas id="ppr" width=400 height=265></canvas><br/>
+Inverted Paper Color<br/>
+<canvas id="ipr" width=400 height=265></canvas><br/>
+Gamma<br/>
+<canvas id="gam" width=400 height=265></canvas><br/>
+Colorize<br/>
+<canvas id="col" width=400 height=265></canvas><br/>
+Posterize<br/>
+<canvas id="pos" width=400 height=265></canvas><br/>
+Luminar<br/>
+<canvas id="lum" width=400 height=265></canvas><br/>
+Shuffe Colors<br/>
+<canvas id="shu" width=400 height=265></canvas><br/>
+Old Time<br/>
+<canvas id="old" width=400 height=265></canvas><br/>
+<script>
+render_farbfeld_coloreffectreplacer(imagepicture,"add","add",[60,0,0]);
+render_farbfeld_coloreffectreplacer(imagepicture,"sub","sub",[100,100,100]);
+render_farbfeld_coloreffectreplacer(imagepicture,"xor","xor",[240,240,240]);
+render_farbfeld_coloreffectreplacer(imagepicture,"bnw","bnw",[255,255,255]);
+render_farbfeld_coloreffectreplacer(imagepicture,"sep","sep",[222,222,222]);
+render_farbfeld_coloreffectreplacer(imagepicture,"map","map",["b40028","fadc00","008250","00a0c8","00288c","aa008c","000000","ffffff"]);
+render_farbfeld_coloreffectreplacer(imagepicture,"emp","emp",["b40028","fadc00","008250","00a0c8","00288c","aa008c","000000","ffffff"]);
+render_farbfeld_coloreffectreplacer(encoded_map,"dmp","dmp",["b40028","fadc00","008250","00a0c8","00288c","aa008c","000000","ffffff"]);
+render_farbfeld_coloreffectreplacer(imagepicture,"ppr","ppr",["87ceeb"]);
+render_farbfeld_coloreffectreplacer(imagepicture,"ipr","ipr",["1f1f1f","f0f0f0"]);
+render_farbfeld_coloreffectreplacer(imagepicture,"gam","gam",[1.2,1.4,1.7]);
+render_farbfeld_coloreffectreplacer(imagepicture,"col","col",["fc1000",100,110,120]);
+render_farbfeld_coloreffectreplacer(imagepicture,"pos","pos",[7,7,7]);
+render_farbfeld_coloreffectreplacer(imagepicture,"lum","lum",[123,128,112,0.5,-0.5,0.25]);
+render_farbfeld_coloreffectreplacer(imagepicture,"shu","shu",[121,240,240,240,123,240]);
+render_farbfeld_coloreffectreplacer(imagepicture,"old","old",[1286698210,3000000]);
+</script>
