@@ -221,6 +221,32 @@ green = Math.floor(base/Math.floor(255/(255-(t-255))))*Math.floor(255.0/(255-(t-
 blue = Math.floor(base/Math.floor(255/(255-(t-255))))*Math.floor(255.0/(255-(t-255)))
 }
 }
+if (mod == "rmp")
+{
+var ar = parseInt(argv[0][0] + argv[0][1],16)
+var ag = parseInt(argv[0][2] + argv[0][3],16)
+var ab = parseInt(argv[0][4] + argv[0][5],16)
+var br = parseInt(argv[1][0] + argv[1][1],16)
+var bg = parseInt(argv[1][2] + argv[1][3],16)
+var bb = parseInt(argv[1][4] + argv[1][5],16)
+var z = Math.max(argv[2]-(Math.abs(red-ar)+Math.abs(green-ag)+Math.abs(blue-ab)),0)
+red = Math.floor(red*(1-(z/argv[2])))+Math.floor(br*(z/argv[2]))
+green = Math.floor(green*(1-(z/argv[2])))+Math.floor(bg*(z/argv[2]))
+blue = Math.floor(blue*(1-(z/argv[2])))+Math.floor(bb*(z/argv[2]))
+}
+if (mod == "rnd")
+{
+var ar = parseInt(argv[0][0] + argv[0][1],16)
+var ag = parseInt(argv[0][2] + argv[0][3],16)
+var ab = parseInt(argv[0][4] + argv[0][5],16)
+var br = Math.floor(Math.random()*256)
+var bg = Math.floor(Math.random()*256)
+var bb = Math.floor(Math.random()*256)
+var z = Math.max(argv[1]-(Math.abs(red-ar)+Math.abs(green-ag)+Math.abs(blue-ab)),0)
+red = Math.floor(red*(1-(z/argv[1])))+Math.floor(br*(z/argv[1]))
+green = Math.floor(green*(1-(z/argv[1])))+Math.floor(bg*(z/argv[1]))
+blue = Math.floor(blue*(1-(z/argv[1])))+Math.floor(bb*(z/argv[1]))
+}
 imgdata.data[4*((a*w)+b)+0] = red;
 imgdata.data[4*((a*w)+b)+1] = green;
 imgdata.data[4*((a*w)+b)+2] = blue;
