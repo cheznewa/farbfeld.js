@@ -139,9 +139,9 @@ var y = 0
 }
 // End Source
 var z = Math.max(Math.floor(k*255),Math.floor(c*255),Math.floor(m*255),Math.floor(y*255))
-red = Math.max(red-Math.floor((255-hr)*((255-z)/255.0)),0)
-green = Math.max(green-Math.floor((255-hg)*((255-z)/255.0)),0)
-blue = Math.max(blue-Math.floor((255-hb)*((255-z)/255.0)),0)
+red = Math.max(red-Math.floor((255-hr)*((255-z)/255)),0)
+green = Math.max(green-Math.floor((255-hg)*((255-z)/255)),0)
+blue = Math.max(blue-Math.floor((255-hb)*((255-z)/255)),0)
 }
 if (mod == "ipr")
 {
@@ -246,6 +246,43 @@ var z = Math.max(argv[1]-(Math.abs(red-ar)+Math.abs(green-ag)+Math.abs(blue-ab))
 red = Math.floor(red*(1-(z/argv[1])))+Math.floor(br*(z/argv[1]))
 green = Math.floor(green*(1-(z/argv[1])))+Math.floor(bg*(z/argv[1]))
 blue = Math.floor(blue*(1-(z/argv[1])))+Math.floor(bb*(z/argv[1]))
+}
+if (mod == "dpr")
+{
+// Source From ::::::: https://www.rapidtables.com/convert/color/rgb-to-cmyk.html
+k = 1-Math.max((red/255),(green/255),(blue/255))
+if (k !== 1)
+{
+var c = (1-(red/255)-k)/(1-k)
+var m = (1-(green/255)-k)/(1-k)
+var y = (1-(blue/255)-k)/(1-k)
+}
+else
+{
+var c = 0
+var m = 0
+var y = 0
+}
+// End Source
+k = (Math.floor(argv[0])/255)*k
+c = (Math.floor(argv[1])/255)*c
+m = (Math.floor(argv[2])/255)*m
+y = (Math.floor(argv[3])/255)*y
+// Source From ::::::: https://www.rapidtables.com/convert/color/cmyk-to-rgb.html
+red   = Math.floor(255*((1-c)*(1-k)))
+green = Math.floor(255*((1-m)*(1-k)))
+blue  = Math.floor(255*((1-y)*(1-k)))
+// End Source
+}
+if (mod == "uni")
+{
+var br = parseInt(argv[0][0] + argv[0][1],16)
+var bg = parseInt(argv[0][2] + argv[0][3],16)
+var bb = parseInt(argv[0][4] + argv[0][5],16)
+var base = Math.floor((red+green+blue)/3)
+red   = Math.floor(base*(br/255))
+green = Math.floor(base*(bg/255))
+blue  = Math.floor(base*(bb/255))
 }
 imgdata.data[4*((a*w)+b)+0] = red;
 imgdata.data[4*((a*w)+b)+1] = green;
