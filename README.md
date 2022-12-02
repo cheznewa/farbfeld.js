@@ -1,5 +1,5 @@
 # Farbfeld.js
-This Javascript Program, Working Render A Farbfeld Image In HTML
+This Javascript Program, Working Render A Farbfeld Image Inside Browser.
 ## How To Use This Program?
 You Insert The `farbfeld.js` And Insert Canvas Images Method In `render_farbfeld(varimg,"canvas")`.
 ## How To Insert A Image Into Javascript?
