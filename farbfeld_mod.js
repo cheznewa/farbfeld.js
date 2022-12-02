@@ -294,7 +294,7 @@ cont.putImageData(imgdata,0,0);
 }
 else
 {
-document.write("Not A Farbfeld");
+document.write("Not A Farbfeld For "+name+" !<br/>");
 }
 }
 function render_farbfeld_ff2clear(ff,name,mod)
@@ -480,7 +480,7 @@ cont.putImageData(imgdata,0,0);
 }
 else
 {
-document.write("Not A Farbfeld");
+document.write("Not A Farbfeld For "+name+" !<br/>");
 }
 }
 function render_farbfeld_clear2ff(ff,name,mod)
@@ -595,7 +595,7 @@ cont.putImageData(imgdata,0,0);
 }
 else
 {
-document.write("Not A Farbfeld");
+document.write("Not A Farbfeld For "+name+" !<br/>");
 }
 }
 function render_farbfeld_ff2clear_custom(ff,name,a,b)
@@ -663,6 +663,6 @@ cont.putImageData(imgdata,0,0);
 }
 else
 {
-document.write("Not A Farbfeld");
+document.write("Not A Farbfeld For "+name+" !<br/>");
 }
 }
