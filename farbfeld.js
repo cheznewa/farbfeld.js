@@ -29,6 +29,6 @@ cont.putImageData(imgdata,0,0);
 }
 else
 {
-document.write("Not A Farbfeld For "+name+"'s Canvas !<br/>");
+document.write("Not A Farbfeld For "+name+" !<br/>");
 }
 }
