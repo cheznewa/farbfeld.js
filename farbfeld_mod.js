@@ -666,3 +666,74 @@ else
 document.write("Not A Farbfeld For "+name+" !<br/>");
 }
 }
+function render_farbfeld_ff2less(ff,name,less)
+{
+var red;
+var green;
+var blue;
+var alpha;
+var rr=0
+var gg=0
+var bb=0
+var rm=0
+var gm=0
+var bm=0
+if (102 == ff[0].charCodeAt() && 97 == ff[1].charCodeAt() && 114 == ff[2].charCodeAt() && 98 == ff[3].charCodeAt() && 102 == ff[4].charCodeAt() && 101 == ff[5].charCodeAt() && 108 == ff[6].charCodeAt() && 100 == ff[7].charCodeAt())
+{
+var w = (ff[8].charCodeAt()*16777216)+(ff[9].charCodeAt()*65536)+(ff[10].charCodeAt()*256)+(ff[11].charCodeAt());
+var h = (ff[12].charCodeAt()*16777216)+(ff[13].charCodeAt()*65536)+(ff[14].charCodeAt()*256)+(ff[15].charCodeAt());
+var c = document.getElementById(name);
+var cont = c.getContext('2d');
+var imgdata = cont.createImageData(w,h);
+for (var a=0;a<h;a++)
+{
+for (var b=0;b<w;b++)
+{
+red   = ff[16+0+(8*(b+(a*w)))].charCodeAt();
+green = ff[16+2+(8*(b+(a*w)))].charCodeAt();
+blue  = ff[16+4+(8*(b+(a*w)))].charCodeAt();
+alpha = ff[16+6+(8*(b+(a*w)))].charCodeAt();
+if (b == 0)
+{
+var rr=red
+var gg=green
+var bb=blue
+}
+var dr=Math.abs(red-rr)
+var dg=Math.abs(green-gg)
+var db=Math.abs(blue-bb)
+var rv=red
+var gv=green
+var bv=blue
+d=Math.max(dr,dg,db)
+if ((d < Math.floor(less/256)) | (d > (255-Math.floor(less/256))))
+{
+rv = red
+gv = green
+bv = blue
+rm = rv
+gm = gv
+bm = bv
+}
+else
+{
+rv = rm
+gv = gm
+bv = bm
+}
+imgdata.data[4*((a*w)+b)+0] = rv;
+imgdata.data[4*((a*w)+b)+1] = gv;
+imgdata.data[4*((a*w)+b)+2] = bv;
+imgdata.data[4*((a*w)+b)+3] = alpha;
+rr=red
+gg=green
+bb=blue
+}
+}
+cont.putImageData(imgdata,0,0);
+}
+else
+{
+document.write("Not A Farbfeld For "+name+" !<br/>");
+}
+}
