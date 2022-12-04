@@ -294,7 +294,7 @@ cont.putImageData(imgdata,0,0);
 }
 else
 {
-document.write("Not A Farbfeld For "+name+" !<br/>");
+throw "Not A Farbfeld For "+name+" !"
 }
 }
 function render_farbfeld_ff2clear(ff,name,mod)
@@ -467,6 +467,36 @@ gv = Math.max(green - Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.25)))
 bv = Math.max(blue - Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.5))),0)
 }
 }
+if (mod == "rgb+")
+{
+if (d < 0)
+{
+rv = Math.min(red + (Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.5))-Math.floor(d/1))),255)
+gv = Math.min(green + (Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.25))-Math.floor(d/2))),255)
+bv = Math.min(blue + (Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.125))-Math.floor(d/3))),255)
+}
+else if (d > 0)
+{
+rv = Math.max(red - (Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.5))+Math.floor(d/1))),0)
+gv = Math.max(green - (Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.25))+Math.floor(d/2))),0)
+bv = Math.max(blue - (Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.125))+Math.floor(d/3))),0)
+}
+}
+if (mod == "bgr+")
+{
+if (d < 0)
+{
+rv = Math.min(red + (Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.125))-Math.floor(d/3))),255)
+gv = Math.min(green + (Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.25))-Math.floor(d/2))),255)
+bv = Math.min(blue + (Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.5))-Math.floor(d/1))),255)
+}
+else if (d > 0)
+{
+rv = Math.max(red - (Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.125))+Math.floor(d/3))),0)
+gv = Math.max(green - (Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.25))+Math.floor(d/2))),0)
+bv = Math.max(blue - (Math.floor(255*(Math.sin(Math.abs(d)/255)*(Math.PI*0.5))+Math.floor(d/1))),0)
+}
+}
 imgdata.data[4*((a*w)+b)+0] = rv;
 imgdata.data[4*((a*w)+b)+1] = gv;
 imgdata.data[4*((a*w)+b)+2] = bv;
@@ -480,7 +510,7 @@ cont.putImageData(imgdata,0,0);
 }
 else
 {
-document.write("Not A Farbfeld For "+name+" !<br/>");
+throw "Not A Farbfeld For "+name+" !"
 }
 }
 function render_farbfeld_clear2ff(ff,name,mod)
@@ -595,7 +625,7 @@ cont.putImageData(imgdata,0,0);
 }
 else
 {
-document.write("Not A Farbfeld For "+name+" !<br/>");
+throw "Not A Farbfeld For "+name+" !"
 }
 }
 function render_farbfeld_ff2clear_custom(ff,name,a,b)
@@ -663,7 +693,7 @@ cont.putImageData(imgdata,0,0);
 }
 else
 {
-document.write("Not A Farbfeld For "+name+" !<br/>");
+throw "Not A Farbfeld For "+name+" !"
 }
 }
 function render_farbfeld_ff2less(ff,name,less)
@@ -734,6 +764,6 @@ cont.putImageData(imgdata,0,0);
 }
 else
 {
-document.write("Not A Farbfeld For "+name+" !<br/>");
+throw "Not A Farbfeld For "+name+" !"
 }
 }
