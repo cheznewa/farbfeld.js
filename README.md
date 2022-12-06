@@ -8,3 +8,5 @@ You Can Use [Base256](https://github.com/lvandeve/base256) For Insert A Image In
 A Full Effects From [ColorEffectReplacer](https://github.com/cheznewa/MyGist/tree/master/coloreffectreplacer) With The Function `render_farbfeld_coloreffectreplacer(varimg,"canvas","add",[80,20,0])` For Example.
 ## Render With FF2Clear
 A Full Clearings (And Back) From [FF2Clear](https://github.com/cheznewa/MyGist/blob/master/ff2clear.py) With The Function `render_farbfeld_ff2clear(varimg,"canvas","rgb")` (And `render_farbfeld_clear2ff(varimg,"canvas","rc")`) For Example.
+## Render With FF2Less
+A Unantialiassing From [FF2Less](https://github.com/cheznewa/MyGist/blob/master/ff2less.py) With The Function `render_farbfeld_ff2less(varimg,"canvas",22500)` For Example.
