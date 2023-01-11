@@ -10,3 +10,5 @@ A Full Effects From [ColorEffectReplacer](https://github.com/cheznewa/MyGist/tre
 A Full Clearings (And Back) From [FF2Clear](https://github.com/cheznewa/MyGist/blob/master/ff2clear.py) With The Function `render_farbfeld_ff2clear(varimg,"canvas","rgb")` (And `render_farbfeld_clear2ff(varimg,"canvas","rc")`) For Example.
 ## Render With FF2Less
 A Unantialiassing From [FF2Less](https://github.com/cheznewa/MyGist/blob/master/ff2less.py) With The Function `render_farbfeld_ff2less(varimg,"canvas",22500)` For Example.
+## Render With Paper Background
+That Simulate Paper With Background From [paperbackground](https://github.com/cheznewa/MyGist/blob/master/paperbackground.py) With The Function `render_farbfeld_paperbackground(varimg,varimgbg,"canvas")` For Example.

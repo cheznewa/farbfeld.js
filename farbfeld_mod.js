@@ -767,3 +767,74 @@ else
 throw "Not A Farbfeld For "+name+" !"
 }
 }
+function render_farbfeld_paperbackground(ff,ffbg,name)
+{
+if (!(102 == ffbg[0].charCodeAt() && 97 == ffbg[1].charCodeAt() && 114 == ffbg[2].charCodeAt() && 98 == ffbg[3].charCodeAt() && 102 == ffbg[4].charCodeAt() && 101 == ffbg[5].charCodeAt() && 108 == ffbg[6].charCodeAt() && 100 == ffbg[7].charCodeAt()))
+{
+throw "Not A Farbfeld Background For "+name+" !";
+}
+var x = (ffbg[8].charCodeAt()*16777216)+(ffbg[9].charCodeAt()*65536)+(ffbg[10].charCodeAt()*256)+(ffbg[11].charCodeAt());
+var y = (ffbg[12].charCodeAt()*16777216)+(ffbg[13].charCodeAt()*65536)+(ffbg[14].charCodeAt()*256)+(ffbg[15].charCodeAt());
+var e = x*y;
+var red;
+var green;
+var blue;
+var alpha;
+var redbg;
+var greenbg;
+var bluebg;
+var alphabg;
+if (102 == ff[0].charCodeAt() && 97 == ff[1].charCodeAt() && 114 == ff[2].charCodeAt() && 98 == ff[3].charCodeAt() && 102 == ff[4].charCodeAt() && 101 == ff[5].charCodeAt() && 108 == ff[6].charCodeAt() && 100 == ff[7].charCodeAt())
+{
+var w = (ff[8].charCodeAt()*16777216)+(ff[9].charCodeAt()*65536)+(ff[10].charCodeAt()*256)+(ff[11].charCodeAt());
+var h = (ff[12].charCodeAt()*16777216)+(ff[13].charCodeAt()*65536)+(ff[14].charCodeAt()*256)+(ff[15].charCodeAt());
+var n = w*h;
+if (n !== e)
+{
+throw "Not Same Size For "+name+" !";
+}
+var c = document.getElementById(name);
+var cont = c.getContext('2d');
+var imgdata = cont.createImageData(w,h);
+for (var a=0;a<h;a++)
+{
+for (var b=0;b<w;b++)
+{
+red   = ff[16+0+(8*(b+(a*w)))].charCodeAt();
+green = ff[16+2+(8*(b+(a*w)))].charCodeAt();
+blue  = ff[16+4+(8*(b+(a*w)))].charCodeAt();
+alpha = ff[16+6+(8*(b+(a*w)))].charCodeAt();
+redbg   = ffbg[16+0+(8*(b+(a*w)))].charCodeAt();
+greenbg = ffbg[16+2+(8*(b+(a*w)))].charCodeAt();
+bluebg  = ffbg[16+4+(8*(b+(a*w)))].charCodeAt();
+// Source From ::::::: https://www.rapidtables.com/convert/color/rgb-to-cmyk.html
+k = 1-Math.max((red/255),(green/255),(blue/255))
+if (k !== 1)
+{
+var c = (1-(red/255)-k)/(1-k)
+var m = (1-(green/255)-k)/(1-k)
+var y = (1-(blue/255)-k)/(1-k)
+}
+else
+{
+var c = 0
+var m = 0
+var y = 0
+}
+var z = Math.max(Math.floor(k*255),Math.floor(c*255),Math.floor(m*255),Math.floor(y*255))
+red = Math.max(red-Math.floor((255-redbg)*((255-z)/255)),0)
+green = Math.max(green-Math.floor((255-greenbg)*((255-z)/255)),0)
+blue = Math.max(blue-Math.floor((255-bluebg)*((255-z)/255)),0)
+imgdata.data[4*((a*w)+b)+0] = red;
+imgdata.data[4*((a*w)+b)+1] = green;
+imgdata.data[4*((a*w)+b)+2] = blue;
+imgdata.data[4*((a*w)+b)+3] = alpha;
+}
+}
+cont.putImageData(imgdata,0,0);
+}
+else
+{
+throw "Not A Farbfeld For "+name+" !"
+}
+}
