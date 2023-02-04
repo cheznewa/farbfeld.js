@@ -14,3 +14,5 @@ A Unantialiassing From [FF2Less](https://github.com/cheznewa/MyGist/blob/master/
 That Simulate Paper With Background From [PaperBackground](https://github.com/cheznewa/MyGist/blob/master/paperbackground.py) With The Function `render_farbfeld_paperbackground(varimg,varimgbg,"canvas")` For Example.
 ## Render With FF2Transparency
 A Transparency With A Template From [FF2Transparency](https://github.com/cheznewa/MyGist/blob/master/ff2transparency.py) With The Function `render_farbfeld_ff2transparency(varimg,template,"canvas",limit)` For Example.
+## Render With FF2LikeSilicon
+A Silicon View Effect From [FF2LikeSilicon](https://github.com/cheznewa/MyGist/blob/master/ff2likesilicon.py) With The Function `render_farbfeld_ff2likesilicon(varimg,"canvas")` For Example.
