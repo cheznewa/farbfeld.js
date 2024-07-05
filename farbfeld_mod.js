@@ -21,27 +21,15 @@ blue  = ff[16+4+(8*(b+(a*w)))].charCodeAt();
 alpha = ff[16+6+(8*(b+(a*w)))].charCodeAt();
 if (mod == "add")
 {
-red   = red   + argv[0]
-green = green + argv[1]
-blue  = blue  + argv[2]
-if (red > 255)
-red = 255
-if (green > 255)
-green = 255
-if (blue > 255)
-blue = 255
+red   = Math.min(red   + argv[0],255)
+green = Math.min(green + argv[1],255)
+blue  = Math.min(blue  + argv[2],255)
 }
 if (mod == "sub")
 {
-red   = red   - argv[0]
-green = green - argv[1]
-blue  = blue  - argv[2]
-if (red < 0)
-red = 0
-if (green < 0)
-green = 0
-if (blue < 0)
-blue = 0
+red   = Math.max(red   - argv[0],0)
+green = Math.max(green - argv[1],0)
+blue  = Math.max(blue  - argv[2],0)
 }
 if (mod == "xor")
 {
@@ -298,6 +286,12 @@ var cc = Math.max(Math.floor((aa-bb)/3),0)
 red = cc
 green = cc
 blue = cc
+}
+if (mod == "tht")
+{
+red   = Math.min(Math.floor(red   * argv[0]),255)
+green = Math.min(Math.floor(green * argv[1]),255)
+blue  = Math.min(Math.floor(blue  * argv[2]),255)
 }
 imgdata.data[4*((a*w)+b)+0] = red;
 imgdata.data[4*((a*w)+b)+1] = green;
